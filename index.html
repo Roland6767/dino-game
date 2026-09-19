@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stick Run｜火柴人跳尖刺</title>
+  <meta name="description" content="像素風火柴人跳尖刺小遊戲，純 HTML + CSS + JavaScript。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpolygon points='8,1 15,15 1,15' fill='%23ff595e'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="cabinet">
+    <header class="hud">
+      <h1 class="title">STICK RUN</h1>
+      <div class="stats">
+        <div class="stat"><span>HI</span><b id="hi">00000</b></div>
+        <div class="stat"><span>SCORE</span><b id="score">00000</b></div>
+        <div class="stat"><span>LV</span><b id="level">01</b></div>
+      </div>
+    </header>
+
+    <div class="screen" id="screen">
+      <canvas id="game" width="320" height="120" role="img"
+              aria-label="火柴人跳尖刺遊戲畫面"></canvas>
+      <div class="banner" id="banner" aria-hidden="true">SPEED UP!</div>
+      <div class="overlay" id="overlay">
+        <div class="overlay-main" id="overlayMain">PRESS SPACE</div>
+        <div class="overlay-sub" id="overlaySub">or tap the screen</div>
+      </div>
+    </div>
+
+    <p class="hint">空白鍵或 ↑ 跳躍，手機直接點擊畫面。每累積 500 分，尖刺逼近的速度就會加快一級。</p>
+    <p class="sr-only" id="status" aria-live="polite"></p>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
