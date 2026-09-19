@@ -382,6 +382,21 @@
   });
   screenEl.addEventListener('pointerdown', e => { e.preventDefault(); press(); });
 
+  /* ---------- 畫面縮放 ----------
+   * 依視窗大小挑「整數倍」放大（3x、4x、5x…），
+   * 這樣每個像素方塊大小一致，邊緣才會銳利。
+   * 手機等放不下 2 倍的小螢幕，就退回 CSS 的滿版寬度。 */
+  const cabinet = document.querySelector('.cabinet');
+  function fitScreen() {
+    const padX = 32, border = 8, reserveY = 210;     // 頁面左右留白、外框、標題與說明文字佔的高度
+    const availW = window.innerWidth - padX - border;
+    const availH = window.innerHeight - reserveY;
+    const scale = Math.floor(Math.min(availW / CFG.width, availH / CFG.height, 8));
+    cabinet.style.width = scale >= 2 ? (CFG.width * scale + border) + 'px' : '';
+  }
+  window.addEventListener('resize', fitScreen);
+  fitScreen();
+
   /* ---------- 主迴圈 ---------- */
   let last = performance.now();
   function frame(now) {
