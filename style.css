@@ -12,13 +12,15 @@
 
 * { box-sizing: border-box; }
 
+html, body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+
 body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: 20px 16px;
+  padding: 14px 16px;
   background: var(--night);
   color: var(--ink);
   font-family: var(--pixel);
@@ -32,7 +34,7 @@ body {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px 24px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .title {
@@ -49,6 +51,9 @@ body {
 }
 .stat span { color: var(--dim); margin-right: 8px; }
 .stat b { font-weight: 400; }
+.stat.buff span,
+.stat.buff b { color: var(--moon); }
+.stat.buff b { display: inline-block; min-width: 4ch; text-align: right; }
 
 .screen {
   position: relative;
@@ -120,7 +125,7 @@ canvas {
 }
 
 .hint {
-  margin: 26px 0 0;
+  margin: 16px 0 0;
   font-family: var(--text);
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.7;
@@ -140,4 +145,26 @@ canvas {
 @media (prefers-reduced-motion: reduce) {
   .overlay-sub { animation: none; }
   .banner.show { animation: none; opacity: 1; }
+}
+
+/* 手機／平板：整個網頁都是觸控範圍，不要捲動、縮放或選取文字，避免誤觸 */
+@media (pointer: coarse) {
+  html, body {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+@media (max-width: 600px) {
+  body { padding: 8px; }
+  .hint { margin-top: 10px; font-size: 13px; }
+}
+
+/* 矮螢幕（例如手機橫放）：收掉說明文字，把高度全部讓給遊戲框 */
+@media (max-height: 520px) {
+  body { padding: 6px 10px; }
+  .hint { display: none; }
+  .hud { margin-bottom: 6px; }
 }
